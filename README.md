@@ -1,2 +1,3 @@
 # otc
-All things onetap crack related :D
+Because I like free stuff.
+Discord : bhgg489#0958
