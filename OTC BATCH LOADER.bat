@@ -1,7 +1,7 @@
 
 
-Created by ms__dos.
-Thanks for using!
+--- Created by ms__dos. ---
+--- Thanks for using!   ---
 
 
 @echo off
