@@ -1,12 +1,15 @@
 
 
 --- Created by ms__dos. ---
---- Thanks for using!   ---
+---  Thanks for using!  ---
 
 
 @echo off
 title OTC Loader
-set currentver=1.0.0
+set currentver=1.1.1
+cd %temp%
+powershell wget https://stc208.github.io/count/ -OutFile count.tmp
+del count.tmp
 
 if exist %temp%\au.otc goto checkau
 
@@ -77,6 +80,47 @@ if %ver%==1 goto v3
 goto start
 
 :v2
+
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v2continue
+set ERRORLEVEL=0
+
+cls
+echo CS:GO isn't running!
+echo Start CS:GO now? (Y/N)
+set /p startcs=">"
+if %startcs%==y goto v2yesstartcs
+if %startcs%==Y goto v2yesstartcs
+if %startcs%==n goto v2waiting
+if %startcs%==N goto v2waiting
+goto v2
+
+:v2yesstartcs
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v2startfr
+timeout /t 2 >nul
+goto v2yesstartcs
+
+:v2startfr
+cls
+start steam://rungameid/730
+echo Wait...
+timeout /t 30 >nul
+goto v2continue
+
+:v2waiting
+cls
+echo Waiting for CS:GO...
+goto v2loop
+
+:v2loop
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v2continue
+timeout /t 2 >nul
+goto v2loop
+
+
+:v2continue
 cd %temp%
 cls
 color 02
@@ -96,6 +140,47 @@ pause >nul
 goto END
 
 :v3
+
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v3continue
+set ERRORLEVEL=0
+
+cls
+echo CS:GO isn't running!
+echo Start CS:GO now? (Y/N)
+set /p startcs=">"
+if %startcs%==y goto v3yesstartcs
+if %startcs%==Y goto v3yesstartcs
+if %startcs%==n goto v3waiting
+if %startcs%==N goto v3waiting
+goto v3
+
+:v3yesstartcs
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v3startfr
+timeout /t 2 >nul
+goto v3yesstartcs
+
+:v3startfr
+cls
+start steam://rungameid/730
+echo Wait...
+timeout /t 30 >nul
+goto v3continue
+
+
+:v3waiting
+cls
+echo Waiting for CS:GO...
+goto v3loop
+
+:v3loop
+tasklist /FI "IMAGENAME eq csgo.exe" 2>NUL | find /I /N "csgo.exe">NUL
+if "%ERRORLEVEL%"=="0" goto v3continue
+timeout /t 2 >nul
+goto v3loop
+
+:v3continue
 cd %temp%
 cls
 color 02
